@@ -33,27 +33,21 @@
 				cursorL = game.add.button(500, 400, 'cursor_l', actionLeft);
 				cursorR = game.add.button(700, 400, 'cursor_r', actionRight);
 
-				cursorU.inputEnabled = true;
-				cursorD.inputEnabled = true;
-				cursorL.inputEnabled = true;
-				cursorR.inputEnabled = true;
-
 				cursors = game.input.keyboard.createCursorKeys();
 			}
 
 			function update() {
 				if (cursors.up.isDown === true) {
-					mario.rotation += 0.05; // mario.rotation = mario.rotation + 0.05; 
+					mario.rotation += 0.05; // mario.rotation
 				}
 				if (cursors.down.isDown === true) {
-					mario.rotation -= 0.05; // mario.rotation = mario.rotation + 0.05; 
+					mario.rotation -= 0.05; // mario.rotation
 				}
 				if (cursors.left.isDown === true) {
-					mario.x -= 1; // mario.rotation = mario.rotation + 0.05; 
+					mario.x -= 1; // mario.rotation
 				}
 				if (cursors.right.isDown === true) {
-					mario.x += 1; // mario.rotation = mario.rotation + 0.05; 
-				}
+					mario.x += 1; // mario.rotation
 			}
 
 			function render() {
