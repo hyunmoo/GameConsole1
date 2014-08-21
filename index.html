@@ -8,6 +8,7 @@
 <body>
 	<script type="text/javascript">
 	window.onload = function() {
+<<<<<<< HEAD
 		var socket = io();
 
 		socket.on('move', function(msg){
@@ -55,10 +56,38 @@
 			cursorL = game.add.button(500, 400, 'cursor_l', actionLeft);
 			cursorR = game.add.button(700, 400, 'cursor_r', actionRight);
 
+=======
+		var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});
+
+		var character;
+		var mario;
+		var cursorU, cursorD, cursorL, cursorR;
+
+		var cursors;
+
+		function preload() {
+			game.load.image('mario', 'assets/mario.png');
+			game.load.image('cursor_u', 'assets/cursor_u.png');
+			game.load.image('cursor_d', 'assets/cursor_d.png');
+			game.load.image('cursor_l', 'assets/cursor_l.png');
+			game.load.image('cursor_r', 'assets/cursor_r.png');
+		}
+
+		function create() {
+			mario = game.add.sprite(300, 200, 'mario');
+			mario.anchor.setTo(0.5, 0.5);
+
+			cursorU = game.add.button(600, 300, 'cursor_u', actionUp);
+			cursorD = game.add.button(600, 500, 'cursor_d', actionDown);
+			cursorL = game.add.button(500, 400, 'cursor_l', actionLeft);
+			cursorR = game.add.button(700, 400, 'cursor_r', actionRight);
+
+>>>>>>> origin/gh-pages
 			cursorU.inputEnabled = true;
 			cursorD.inputEnabled = true;
 			cursorL.inputEnabled = true;
 			cursorR.inputEnabled = true;
+<<<<<<< HEAD
 
 			cursors = game.input.keyboard.createCursorKeys();
 
@@ -68,15 +97,28 @@
 			if (cursors.up.isDown === true) {
 
 					mario.rotation += 0.05; // mario.rotation
+=======
+
+			cursors = game.input.keyboard.createCursorKeys();
+		}
+
+		function update() {
+			if (cursors.up.isDown === true) {
+					mario.rotation += 0.05; // mario.rotation = mario.rotation + 0.05; 
+>>>>>>> origin/gh-pages
 				}
 				if (cursors.down.isDown === true) {
-					mario.rotation -= 0.05; // mario.rotation
+					mario.rotation -= 0.05; // mario.rotation = mario.rotation + 0.05; 
 				}
 				if (cursors.left.isDown === true) {
-					mario.x -= 1; // mario.rotation
+					mario.x -= 1; // mario.rotation = mario.rotation + 0.05; 
 				}
 				if (cursors.right.isDown === true) {
+<<<<<<< HEAD
 					mario.x += 1; // mario.rotation
+=======
+					mario.x += 1; // mario.rotation = mario.rotation + 0.05; 
+>>>>>>> origin/gh-pages
 				}
 			}
 
@@ -103,4 +145,8 @@
 
 		</script>
 	</body>
+<<<<<<< HEAD
 	</html>
+=======
+	</html>
+>>>>>>> origin/gh-pages
