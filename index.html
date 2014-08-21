@@ -1,43 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Simple Game Console_0742791</title>
+	<title>Simple Game Console</title>
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/phaser/2.0.6/phaser.min.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 	<script type="text/javascript">
-		window.onload = function() {
-			var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});
+	window.onload = function() {
+		var socket = io();
 
-			var character;
-			var mario;
-			var cursorU, cursorD, cursorL, cursorR;
-
-			var cursors;
-
-			function preload() {
-				game.load.image('mario', 'assets/mario.png');
-				game.load.image('cursor_u', 'assets/cursor_u.png');
-				game.load.image('cursor_d', 'assets/cursor_d.png');
-				game.load.image('cursor_l', 'assets/cursor_l.png');
-				game.load.image('cursor_r', 'assets/cursor_r.png');
+		socket.on('move', function(msg){
+			console.log('move: ' + msg);
+			if (msg === 'up') 
+			{
+				mario.y -= 30;
 			}
-
-			function create() {
-				mario = game.add.sprite(300, 200, 'mario');
-				mario.anchor.setTo(0.5, 0.5);
-
-				// cursorU = game.add.sprite(600, 300, 'cursor_u');
-				cursorU = game.add.button(600, 300, 'cursor_u', actionUp);
-				cursorD = game.add.button(600, 500, 'cursor_d', actionDown);
-				cursorL = game.add.button(500, 400, 'cursor_l', actionLeft);
-				cursorR = game.add.button(700, 400, 'cursor_r', actionRight);
-
-				cursors = game.input.keyboard.createCursorKeys();
+			if (msg === 'down') 
+			{
+				mario.y += 30;
 			}
+			if (msg === 'left') 
+			{
+				mario.x -= 30;
+			}
+			if (msg === 'right') 
+			{
+				mario.x += 30;
+			}
+		});
 
-			function update() {
-				if (cursors.up.isDown === true) {
+		var game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});
+
+		var character;
+		var mario;
+		var cursorU, cursorD, cursorL, cursorR;
+
+		var cursors;
+
+		function preload() {
+			game.load.image('mario', 'assets/mario.png');
+			game.load.image('cursor_u', 'assets/cursor_u.png');
+			game.load.image('cursor_d', 'assets/cursor_d.png');
+			game.load.image('cursor_l', 'assets/cursor_l.png');
+			game.load.image('cursor_r', 'assets/cursor_r.png');
+		}
+
+		function create() {
+			mario = game.add.sprite(300, 200, 'mario');
+			mario.anchor.setTo(0.5, 0.5);
+
+			cursorU = game.add.button(600, 300, 'cursor_u', actionUp);
+			cursorD = game.add.button(600, 500, 'cursor_d', actionDown);
+			cursorL = game.add.button(500, 400, 'cursor_l', actionLeft);
+			cursorR = game.add.button(700, 400, 'cursor_r', actionRight);
+
+			cursorU.inputEnabled = true;
+			cursorD.inputEnabled = true;
+			cursorL.inputEnabled = true;
+			cursorR.inputEnabled = true;
+
+			cursors = game.input.keyboard.createCursorKeys();
+
+		}
+
+		function update() {
+			if (cursors.up.isDown === true) {
+
 					mario.rotation += 0.05; // mario.rotation
 				}
 				if (cursors.down.isDown === true) {
@@ -48,25 +77,30 @@
 				}
 				if (cursors.right.isDown === true) {
 					mario.x += 1; // mario.rotation
+				}
 			}
 
 			function render() {
 			}
 
 			function actionUp() {
-				mario.y -= 30;
+				socket.emit('move', 'up');
+				//mario.y -= 30;
 			}
 			function actionLeft() {
-				mario.x -= 30;
+				socket.emit('move', 'left');
+				//mario.x -= 30;
 			}
 			function actionRight() {
-				mario.x += 30;
+				socket.emit('move', 'right');
+				//mario.x += 30;
 			}
 			function actionDown() {
-				mario.y += 30;
+				socket.emit('move', 'down');
+				//mario.y += 30;
 			}
 		};
 
-	</script>
-</body>
-</html>
+		</script>
+	</body>
+	</html>
