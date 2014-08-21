@@ -44,29 +44,26 @@
 				if (cursors.right.isDown === true) {
 					mario.x += 1; // mario.rotation
 				}
+			}
+			function render() {
+			}
 
-				function render() {
-				}
+			function actionUp() {
+				mario.y -= 30;
+			}
+			function actionLeft() {
+				mario.x -= 30;
+			}
+			function actionRight() {
+				mario.x += 30;
+			}
+			function actionDown() {
+				mario.y += 30;
+			}
 
-				function actionUp() {
-					mario.y -= 30;
-				}
-				function actionLeft() {
-					mario.x -= 30;
-				}
-				function actionRight() {
-					mario.x += 30;
-				}
-				function actionDown() {
-					mario.y += 30;
-				}
-
-
-
-
-			};
+		};
 
 
-			</script>
-		</body>
-		</html>
+		</script>
+	</body>
+	</html>
